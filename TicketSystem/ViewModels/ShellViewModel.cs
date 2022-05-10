@@ -1,39 +1,40 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicketSystem.Decorators;
 using TicketSystem.Models;
-using TicketSystem.ViewModels.Models;
 
 namespace TicketSystem.ViewModels
 {
     public class ShellViewModel : Screen
     {
         //New collection of tickets
-        private BindableCollection<ITicket> _tickets = new BindableCollection<ITicket>();
+        private BindableCollection<TicketModel> _tickets = new BindableCollection<TicketModel>();
 
-        private double _tourPrice;
-        public double TourPrice
-        {
-            get { return _tourPrice; }
-            set { _tourPrice = value; }
-        }
+        public double TotalCost { get; set; }
+        public TicketModel Adult { get; set; } = new AdultTicketModel();
+        public TicketModel Child { get; set; } = new ChildTicketModel();
+        public TicketModel Member { get; set; } = new MemberTicketModel();
 
 
         //Private ticket field
-        private ITicket _selectedTicket;
+        private TicketModel _selectedTicket;
 
         //Adds Tickets to the bindable collection
         public ShellViewModel()
         {
-            Tickets.Add(new AdultTicketModel());
-            Tickets.Add(new ChildTicketModel());
-            Tickets.Add(new MemberTicketModel());
+            Tickets.Add(Adult);
+            Tickets.Add(Child);
+            Tickets.Add(Member);
+            TotalCost = Tickets[0].Price; //Initially sets the cost to the first ticket selected
+            
         }
 
-        public BindableCollection<ITicket> Tickets
+        public BindableCollection<TicketModel> Tickets
         {
             get { return _tickets; }
             set { _tickets = value; }
@@ -41,19 +42,36 @@ namespace TicketSystem.ViewModels
 
 
         //Property used to access field
-        public ITicket SelectedTicket
+        public TicketModel SelectedTicket
         {
             get { return _selectedTicket; }
             set 
             { 
                 _selectedTicket = value;
                 NotifyOfPropertyChange(() => SelectedTicket);
+                CalculateCost();
+                NotifyOfPropertyChange(() => TotalCost);
             }
         }
         public void AddTour()
         {
-            TourPrice = 10.99;
-            NotifyOfPropertyChange(() => TourPrice);
+            SelectedTicket = new TourAddon(SelectedTicket);
+            NotifyOfPropertyChange(() => SelectedTicket);
+            NotifyOfPropertyChange(() => TotalCost);
+        }
+
+        public void AddFrontRow()
+        {
+            SelectedTicket = new FrontRowAddon(SelectedTicket);
+            NotifyOfPropertyChange(() => SelectedTicket);
+            NotifyOfPropertyChange(() => TotalCost);
+        }
+
+        public void CalculateCost()
+        {
+            TotalCost = SelectedTicket.Cost();
+            TotalCost = Math.Round(TotalCost, 2, MidpointRounding.AwayFromZero);
+            NotifyOfPropertyChange(() => TotalCost);
         }
 
     }

@@ -4,11 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicketSystem.ViewModels.Models
+namespace TicketSystem.Models
 {
-    class ChildTicketModel : ITicket
+    public class ChildTicketModel : TicketModel
     {
-        public string Name { get; set; } = "Child Ticket";
-        public double Price { get; set; } = 5.99;
+        public ChildTicketModel()
+        {
+            Name = "Child Ticket";
+            Price = 4.99;
+        }
+        public override double Cost()
+        {
+            return Math.Round(4.99, 2, MidpointRounding.AwayFromZero);
+        }
     }
 }

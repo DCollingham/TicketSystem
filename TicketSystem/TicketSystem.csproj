@@ -77,11 +77,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ITicket.cs" />
-    <Compile Include="Models\AdultTicketModel.cs" />
+    <Compile Include="Decorators\FrontRowAddon.cs" />
+    <Compile Include="Decorators\TourAddon.cs" />
     <Compile Include="Models\ChildTicketModel.cs" />
     <Compile Include="Models\MemberTicketModel.cs" />
-    <Compile Include="Models\TourModel.cs" />
+    <Compile Include="Models\AdultTicketModel.cs" />
+    <Compile Include="Decorators\TicketDecorator.cs" />
+    <Compile Include="Models\TicketModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -115,7 +117,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\background.png" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>

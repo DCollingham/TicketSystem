@@ -5,36 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TicketSystem.Views"
         mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800">
+        Title="Book with Exe River Arena" Height="450" Width="650"
+        ResizeMode="NoResize"
+        Background="#48799d">
+
+    <Window.Resources>
+        <!-- One style for each *type* of control on the window -->
+        
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/background.png" Stretch="Fill" />
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="20" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!--Row 2 Combo box Binds to Selected ticket from form to source-->
-        <ComboBox x:Name="Tickets" Grid.Row="2" Grid.Column="1"
+        <ComboBox x:Name="Tickets" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" MaxHeight="25"
                   SelectedItem="{Binding Path=SelectedTicket, Mode=OneWayToSource}"
                   DisplayMemberPath="Name" MinWidth="120" SelectedIndex="0"/>
-        <TextBlock Grid.Row="2" Grid.Column="2" x:Name="SelectedTicket_Price"/>
 
-        <Button Grid.Row="3" Grid.Column="1" Content="Add Tour" x:Name="AddTour"/>
+        <!--Row 3 Tour button and tour price-->
+        <Button Grid.Row="3" Grid.Column="1" Content="Add Tour" x:Name="AddTour" Grid.ColumnSpan="3"/>
         <TextBlock Grid.Row="3" Grid.Column="2" x:Name="TourPrice"/>
+
+        <!--Row 4 Tour button and tour price-->
+        <Button Grid.Row="4" Grid.Column="1" Content="Add Fries" x:Name="AddFrontRow" Grid.ColumnSpan="3"/>
+        <TextBlock Grid.Row="4" Grid.Column="2" x:Name="FriesPrice"/>
+
+        <!--Row 5-->
+        <Label x:Name="TicketType_Name"  Grid.Row="5" Grid.Column="5"/>
+
+
+        <!--Row 7-->
+        <Label x:Name="SelectedTicket_Name"  Grid.Row="9" Grid.Column="7"
+               HorizontalContentAlignment="Center"
+               FontSize="14" FontWeight="Bold" />
+        <Label Content="TotalCost"  Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"/>
+        <Label x:Name="TotalCost"  Grid.Row="8" Grid.Column="9"/>
+
+
     </Grid>
 </Window>
