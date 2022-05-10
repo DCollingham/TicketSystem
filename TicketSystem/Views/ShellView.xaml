@@ -7,6 +7,30 @@
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         
+        <!--Row 2 Combo box Binds to Selected ticket from form to source-->
+        <ComboBox x:Name="Tickets" Grid.Row="2" Grid.Column="1"
+                  SelectedItem="{Binding Path=SelectedTicket, Mode=OneWayToSource}"
+                  DisplayMemberPath="Name" MinWidth="120" SelectedIndex="0"/>
     </Grid>
 </Window>
