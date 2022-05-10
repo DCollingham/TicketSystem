@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicketSystem.Models;
 using TicketSystem.ViewModels.Models;
 
 namespace TicketSystem.ViewModels
@@ -12,6 +13,14 @@ namespace TicketSystem.ViewModels
     {
         //New collection of tickets
         private BindableCollection<ITicket> _tickets = new BindableCollection<ITicket>();
+
+        private double _tourPrice;
+        public double TourPrice
+        {
+            get { return _tourPrice; }
+            set { _tourPrice = value; }
+        }
+
 
         //Private ticket field
         private ITicket _selectedTicket;
@@ -40,6 +49,11 @@ namespace TicketSystem.ViewModels
                 _selectedTicket = value;
                 NotifyOfPropertyChange(() => SelectedTicket);
             }
+        }
+        public void AddTour()
+        {
+            TourPrice = 10.99;
+            NotifyOfPropertyChange(() => TourPrice);
         }
 
     }
