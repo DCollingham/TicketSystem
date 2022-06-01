@@ -11,7 +11,7 @@
 
     <Window.Resources>
         <!-- One style for each *type* of control on the window -->
-        
+
         <Style TargetType="Button">
             <Setter Property="Margin" Value="2"/>
         </Style>
@@ -54,40 +54,75 @@
         </Grid.RowDefinitions>
 
         <!--Row 2 Combo box Binds to Selected ticket from form to source-->
-        <ComboBox x:Name="Tickets" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" MaxHeight="25"
+        <ComboBox x:Name="Tickets" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" MaxHeight="25"
                   ItemsSource="{Binding Tickets}"  
                   SelectedIndex="0"
                   SelectedItem="{Binding SelectedTicket}"
                   DisplayMemberPath="Name" MinWidth="120" 
-                  IsEnabled="{Binding ComboEnabled}"
+                  IsEnabled="{Binding ComboEnabled}" 
                   />
 
         <!--Row 3 Tour button and tour price-->
-        <Button  Grid.Row="3" Grid.Column="1" Content="Add Tour" 
+        <Button  Grid.Row="2" Grid.Column="1" Content="Add Tour" 
                  x:Name="AddTour" Grid.ColumnSpan="3" 
-                 IsEnabled="{Binding TourEnabled}"
-                 IsCancel="True"/>
+                 IsEnabled="{Binding TourEnabled}"/>
         <TextBlock Grid.Row="3" Grid.Column="2" x:Name="TourPrice"/>
 
         <!--Row 4 Tour button and tour price-->
-        <Button Grid.Row="4" Grid.Column="1" Content="Add Front Row" x:Name="AddFrontRow" Grid.ColumnSpan="3" IsEnabled="{Binding FrontRowEnabled}"/>
+        <Button Grid.Row="3" Grid.Column="1" Content="Add Front Row" x:Name="AddFrontRow" Grid.ColumnSpan="3" IsEnabled="{Binding FrontRowEnabled}"/>
         <TextBlock Grid.Row="4" Grid.Column="2" x:Name="FriesPrice"/>
 
-        <Button Grid.Row="5" Grid.Column="1" Content="Add Pie" x:Name="addPieButton" Grid.ColumnSpan="3"/>
-        <Button Grid.Row="6" Grid.Column="1" Content="Add Pint" x:Name="addPintButton" Grid.ColumnSpan="3"/>
-        <Button Grid.Row="7" Grid.Column="1" Content="Reset" x:Name="ResetButton" Grid.ColumnSpan="3"   Command="{Binding Path=ResetPageCommand}"/>
+        <Button Grid.Row="4" Grid.Column="1" Content="Add Pie" 
+                x:Name="AddPie" Grid.ColumnSpan="3"
+                 IsEnabled="{Binding PieEnabled}"/>
+
+        <Button Grid.Row="5" Grid.Column="1" Content="Add Pint" 
+                x:Name="AddPint" Grid.ColumnSpan="3"
+                 IsEnabled="{Binding PintEnabled}"/>
+
+        <Button Grid.Row="6" Grid.Column="1" Content="Reset" 
+                x:Name="ResetButton" Grid.ColumnSpan="3"   
+                Command="{Binding Path=ResetPageCommand}"/>
+        
+        <Button Grid.Row="7" Grid.Column="1" Content="Pay" 
+                x:Name="PrintButton" Grid.ColumnSpan="3"   
+                Command="{Binding Path=PrintPageCommand}"/>
 
         <!--Row 5-->
         <Label x:Name="TicketType_Name"  Grid.Row="5" Grid.Column="5"/>
 
 
         <!--Row 7-->
-        <Label x:Name="SelectedTicket_Name"  Grid.Row="9" Grid.Column="6"
+        <Label x:Name="SelectedTicket_Name"  Grid.Row="8" Grid.Column="6"
+               HorizontalContentAlignment="Center"
+               FontSize="14" FontWeight="Bold" />
+        <Label x:Name="SelectedTicket_FoodItem"  Grid.Row="9" Grid.Column="6"
                HorizontalContentAlignment="Center"
                FontSize="14" FontWeight="Bold" />
         <Label Content="TotalCost"  Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3"/>
         <Label x:Name="TotalCost"  Grid.Row="10" Grid.Column="3"/>
-
+        
+        <!--Slider Tickets Row 8-->
+        <Slider Grid.Row="8"
+                Grid.Column="1"
+               Grid.ColumnSpan="3"
+                IsSnapToTickEnabled="True"
+                Value="1" 
+                Minimum="1" 
+                Maximum="4" 
+                Ticks="1, 2, 3, 4"
+                Margin="0,10,0,0"
+                TickPlacement="BottomRight" 
+                TickFrequency="10"/>
+        <!--QCode Image-->
+        <Image Source="/Images/qcode.png" 
+               Width="40"
+               Grid.Row="7"
+               Grid.Column="5"
+               HorizontalAlignment="Left" 
+               Grid.ColumnSpan="2" Grid.RowSpan="3"
+               Margin="25,30,0,0"
+               Visibility="{Binding QCode}"/>
 
     </Grid>
 </Window>
