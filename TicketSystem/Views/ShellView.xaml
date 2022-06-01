@@ -80,13 +80,15 @@
                 x:Name="AddPint" Grid.ColumnSpan="3"
                  IsEnabled="{Binding PintEnabled}"/>
 
-        <Button Grid.Row="6" Grid.Column="1" Content="Reset" 
+        <Button Grid.Row="6" Grid.Column="1" Content="Pay" 
+                x:Name="PrintButton" Grid.ColumnSpan="3"   
+                Command="{Binding Path=PrintPageCommand}"
+                IsEnabled="{Binding PayEnabled}"/>
+
+        <Button Grid.Row="7" Grid.Column="1" Content="Reset" 
                 x:Name="ResetButton" Grid.ColumnSpan="3"   
                 Command="{Binding Path=ResetPageCommand}"/>
         
-        <Button Grid.Row="7" Grid.Column="1" Content="Pay" 
-                x:Name="PrintButton" Grid.ColumnSpan="3"   
-                Command="{Binding Path=PrintPageCommand}"/>
 
         <!--Row 5-->
         <Label x:Name="TicketType_Name"  Grid.Row="5" Grid.Column="5"/>
@@ -99,21 +101,29 @@
         <Label x:Name="SelectedTicket_FoodItem"  Grid.Row="9" Grid.Column="6"
                HorizontalContentAlignment="Center"
                FontSize="14" FontWeight="Bold" />
+
+
+        <Label Content="Ticket Quantity"  Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3"/>
+        <Label x:Name="TicketAmount"  Grid.Row="9" Grid.Column="4"/>
+
         <Label Content="TotalCost"  Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3"/>
         <Label x:Name="TotalCost"  Grid.Row="10" Grid.Column="3"/>
         
         <!--Slider Tickets Row 8-->
-        <Slider Grid.Row="8"
+        <Slider 
+                x:Name="TicketSlider"
+                Grid.Row="8"
                 Grid.Column="1"
-               Grid.ColumnSpan="3"
+                Grid.ColumnSpan="3"
                 IsSnapToTickEnabled="True"
-                Value="1" 
                 Minimum="1" 
                 Maximum="4" 
                 Ticks="1, 2, 3, 4"
                 Margin="0,10,0,0"
                 TickPlacement="BottomRight" 
-                TickFrequency="10"/>
+                TickFrequency="10"
+                Value="{Binding TicketAmount, Mode=TwoWay}"
+            IsEnabled="{Binding SliderEnabled}"/>
         <!--QCode Image-->
         <Image Source="/Images/qcode.png" 
                Width="40"

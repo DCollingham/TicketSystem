@@ -14,6 +14,9 @@ namespace TicketSystem.ViewModels
 {
     public class ShellViewModel : Screen
     {
+
+        private int _ticketAmount;
+
         public double TotalCost { get; set; }
         public TicketModel Adult { get; set; } = new AdultTicketModel();
         public TicketModel Child { get; set; } = new ChildTicketModel();
@@ -22,9 +25,23 @@ namespace TicketSystem.ViewModels
         public bool FrontRowEnabled { get; set; } = true;
         public bool ComboEnabled { get; set; } = true;
         public bool PieEnabled { get; set; } = true;
+        public bool SliderEnabled { get; set; } = true;
         public bool PintEnabled { get; set; } = true;
+        public bool PayEnabled { get; set; } = true;
         public string QCode { get; set; } = "Hidden";
 
+        public int TicketAmount
+        {
+            get => _ticketAmount;
+
+            set
+            {
+                _ticketAmount = value;
+                NotifyOfPropertyChange(() => TicketAmount);
+                NotifyOfPropertyChange(() => TotalCost);
+                CalculateCost();
+            }
+        }
         public BindableCollection<TicketModel> Tickets { get; set; }
 
         //Private ticket field
@@ -35,6 +52,7 @@ namespace TicketSystem.ViewModels
         {
             _selectedTicket = Adult;
             TotalCost = _selectedTicket.Price; //Initially sets the cost to the first ticket selected
+            TicketAmount = 1; //
             Tickets = new BindableCollection<TicketModel>();
             Tickets.Add(Adult);
             Tickets.Add(Child);
@@ -104,10 +122,11 @@ namespace TicketSystem.ViewModels
 
         public void CalculateCost()
         {
-            TotalCost = SelectedTicket.Cost();
+            TotalCost = SelectedTicket.Cost() * TicketAmount;
             TotalCost = Math.Round(TotalCost, 2, MidpointRounding.AwayFromZero);
             NotifyOfPropertyChange(() => TotalCost);
         }
+
 
         private ActionCommand resetPage;
 
@@ -132,7 +151,10 @@ namespace TicketSystem.ViewModels
             PieEnabled = true;
             PintEnabled = true;
             ComboEnabled = true;
+            SliderEnabled = true;
             QCode = "Hidden";
+            TicketAmount = 1;
+            PayEnabled = true;
             NotifyOfPropertyChange(() => ComboEnabled);
             NotifyOfPropertyChange(() => Tickets);
             NotifyOfPropertyChange(() => TotalCost);
@@ -142,6 +164,9 @@ namespace TicketSystem.ViewModels
             NotifyOfPropertyChange(() => PintEnabled);
             NotifyOfPropertyChange(() => PieEnabled);
             NotifyOfPropertyChange(() => QCode);
+            NotifyOfPropertyChange(() => TicketAmount);
+            NotifyOfPropertyChange(() => SliderEnabled);
+            NotifyOfPropertyChange(() => PayEnabled);
         }
 
         private ActionCommand printPageCommand;
@@ -168,12 +193,17 @@ namespace TicketSystem.ViewModels
             PieEnabled = false;
             PintEnabled = false;
             ComboEnabled = false;
+            SliderEnabled = false;
+            PayEnabled = false;
+            NotifyOfPropertyChange(() => SliderEnabled);
             NotifyOfPropertyChange(() => ComboEnabled);
             NotifyOfPropertyChange(() => SelectedTicket);
             NotifyOfPropertyChange(() => FrontRowEnabled);
             NotifyOfPropertyChange(() => TourEnabled);
             NotifyOfPropertyChange(() => PintEnabled);
             NotifyOfPropertyChange(() => PieEnabled);
+            NotifyOfPropertyChange(() => PayEnabled);
+
 
 
         }
