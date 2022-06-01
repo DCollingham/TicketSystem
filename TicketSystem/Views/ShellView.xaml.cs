@@ -23,5 +23,10 @@ namespace TicketSystem.Views
         {
             InitializeComponent();
         }
+
+        private void Tickets_IsHitTestVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
     }
 }

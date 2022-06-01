@@ -10,6 +10,7 @@ namespace TicketSystem.Models
     {
         public virtual string Name { get; set; }
         public virtual double Price { get; set; }
+        public virtual string FoodItem { get; set; }
         public abstract double Cost();
     }
 }

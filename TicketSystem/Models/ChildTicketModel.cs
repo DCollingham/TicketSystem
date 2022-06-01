@@ -15,7 +15,7 @@ namespace TicketSystem.Models
         }
         public override double Cost()
         {
-            return Math.Round(4.99, 2, MidpointRounding.AwayFromZero);
+            return Math.Round(Price, 2, MidpointRounding.AwayFromZero);
         }
     }
 }
