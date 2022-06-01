@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TicketSystem.Views"
+        xmlns:local="clr-namespace:TicketSystem.Views" xmlns:viewmodels="clr-namespace:TicketSystem.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ShellViewModel}"
         mc:Ignorable="d"
         Title="Book with Exe River Arena" Height="450" Width="650"
         ResizeMode="NoResize"
@@ -21,6 +21,8 @@
         <Style TargetType="Label">
             <Setter Property="Padding" Value="0"/>
         </Style>
+
+
     </Window.Resources>
     <Grid>
         <Grid.Background>
@@ -33,9 +35,7 @@
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
@@ -55,27 +55,38 @@
 
         <!--Row 2 Combo box Binds to Selected ticket from form to source-->
         <ComboBox x:Name="Tickets" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" MaxHeight="25"
-                  SelectedItem="{Binding Path=SelectedTicket, Mode=OneWayToSource}"
-                  DisplayMemberPath="Name" MinWidth="120" SelectedIndex="0"/>
+                  ItemsSource="{Binding Tickets}"  
+                  SelectedIndex="0"
+                  SelectedItem="{Binding SelectedTicket}"
+                  DisplayMemberPath="Name" MinWidth="120" 
+                  IsEnabled="{Binding ComboEnabled}"
+                  />
 
         <!--Row 3 Tour button and tour price-->
-        <Button Grid.Row="3" Grid.Column="1" Content="Add Tour" x:Name="AddTour" Grid.ColumnSpan="3"/>
+        <Button  Grid.Row="3" Grid.Column="1" Content="Add Tour" 
+                 x:Name="AddTour" Grid.ColumnSpan="3" 
+                 IsEnabled="{Binding TourEnabled}"
+                 IsCancel="True"/>
         <TextBlock Grid.Row="3" Grid.Column="2" x:Name="TourPrice"/>
 
         <!--Row 4 Tour button and tour price-->
-        <Button Grid.Row="4" Grid.Column="1" Content="Add Fries" x:Name="AddFrontRow" Grid.ColumnSpan="3"/>
+        <Button Grid.Row="4" Grid.Column="1" Content="Add Front Row" x:Name="AddFrontRow" Grid.ColumnSpan="3" IsEnabled="{Binding FrontRowEnabled}"/>
         <TextBlock Grid.Row="4" Grid.Column="2" x:Name="FriesPrice"/>
+
+        <Button Grid.Row="5" Grid.Column="1" Content="Add Pie" x:Name="addPieButton" Grid.ColumnSpan="3"/>
+        <Button Grid.Row="6" Grid.Column="1" Content="Add Pint" x:Name="addPintButton" Grid.ColumnSpan="3"/>
+        <Button Grid.Row="7" Grid.Column="1" Content="Reset" x:Name="ResetButton" Grid.ColumnSpan="3"   Command="{Binding Path=ResetPageCommand}"/>
 
         <!--Row 5-->
         <Label x:Name="TicketType_Name"  Grid.Row="5" Grid.Column="5"/>
 
 
         <!--Row 7-->
-        <Label x:Name="SelectedTicket_Name"  Grid.Row="9" Grid.Column="7"
+        <Label x:Name="SelectedTicket_Name"  Grid.Row="9" Grid.Column="6"
                HorizontalContentAlignment="Center"
                FontSize="14" FontWeight="Bold" />
-        <Label Content="TotalCost"  Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"/>
-        <Label x:Name="TotalCost"  Grid.Row="8" Grid.Column="9"/>
+        <Label Content="TotalCost"  Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3"/>
+        <Label x:Name="TotalCost"  Grid.Row="10" Grid.Column="3"/>
 
 
     </Grid>
