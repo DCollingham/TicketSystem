@@ -10,6 +10,7 @@ namespace TicketSystem.Decorators
     class TourAddon : TicketDecorator
     {
         private readonly TicketModel _ticketModel;
+        private readonly double _tourPrice = 10.50;
 
         public TourAddon(TicketModel ticketModel)
         {
@@ -19,7 +20,7 @@ namespace TicketSystem.Decorators
 
         public override double Cost()
         {
-            return this._ticketModel.Cost() + 10.50;
+            return this._ticketModel.Cost() + _tourPrice;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace TicketSystem.Decorators
 
         public override double Cost()
         {
-            return this._ticketModel.Cost() + 5.50;
+            return this._ticketModel.Cost() + 3.50;
         }
     }
 }

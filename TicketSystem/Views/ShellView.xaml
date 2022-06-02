@@ -11,7 +11,6 @@
 
     <Window.Resources>
         <!-- One style for each *type* of control on the window -->
-
         <Style TargetType="Button">
             <Setter Property="Margin" Value="2"/>
         </Style>
@@ -53,7 +52,8 @@
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
 
-        <!--Row 2 Combo box Binds to Selected ticket from form to source-->
+        <!--Row 1 Combo box Binds to Selected ticket -->
+        <!--Binds to Tickets, selected item is SelectedTicket, is Enabled binds to isEnabled property-->
         <ComboBox x:Name="Tickets" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" MaxHeight="25"
                   ItemsSource="{Binding Tickets}"  
                   SelectedIndex="0"
@@ -62,11 +62,11 @@
                   IsEnabled="{Binding ComboEnabled}" 
                   />
 
-        <!--Row 3 Tour button and tour price-->
+        <!--Row 2 Tour button and tour price-->
         <Button  Grid.Row="2" Grid.Column="1" Content="Add Tour" 
                  x:Name="AddTour" Grid.ColumnSpan="3" 
                  IsEnabled="{Binding TourEnabled}"/>
-        <TextBlock Grid.Row="3" Grid.Column="2" x:Name="TourPrice"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" x:Name="TourAddon__tourPrice"/>
 
         <!--Row 4 Tour button and tour price-->
         <Button Grid.Row="3" Grid.Column="1" Content="Add Front Row" x:Name="AddFrontRow" Grid.ColumnSpan="3" IsEnabled="{Binding FrontRowEnabled}"/>
