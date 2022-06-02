@@ -10,9 +10,12 @@
         Background="#48799d">
 
     <Window.Resources>
-        <!-- One style for each *type* of control on the window -->
+        <!-- Styles every button -->
         <Style TargetType="Button">
             <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Background" Value="#d2c0a9" />
         </Style>
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="0"/>
@@ -20,13 +23,24 @@
         <Style TargetType="Label">
             <Setter Property="Padding" Value="0"/>
         </Style>
+        <!--Total price currency style-->
+        <Style x:Key="priceStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Grid.ColumnSpan" Value="2" />
+        </Style>
+
+
 
 
     </Window.Resources>
     <Grid>
         <Grid.Background>
+            <!--Background image set to fill view-->
             <ImageBrush ImageSource="/Images/background.png" Stretch="Fill" />
         </Grid.Background>
+        <!--Defines column amount and width-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="40"/>
@@ -38,6 +52,7 @@
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
+        <!--Defines row amount and width-->
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
             <RowDefinition Height="40" />
@@ -66,49 +81,58 @@
         <Button  Grid.Row="2" Grid.Column="1" Content="Add Tour" 
                  x:Name="AddTour" Grid.ColumnSpan="3" 
                  IsEnabled="{Binding TourEnabled}"/>
-        <TextBlock Grid.Row="2" Grid.Column="4" x:Name="TourAddon__tourPrice"/>
 
-        <!--Row 4 Tour button and tour price-->
+        <!--Row 3 Tour button and tour price-->
         <Button Grid.Row="3" Grid.Column="1" Content="Add Front Row" x:Name="AddFrontRow" Grid.ColumnSpan="3" IsEnabled="{Binding FrontRowEnabled}"/>
-        <TextBlock Grid.Row="4" Grid.Column="2" x:Name="FriesPrice"/>
 
+        <!--Row 4 add pie button-->
         <Button Grid.Row="4" Grid.Column="1" Content="Add Pie" 
                 x:Name="AddPie" Grid.ColumnSpan="3"
                  IsEnabled="{Binding PieEnabled}"/>
-
+        
+        <!--Row 5 add column button-->
         <Button Grid.Row="5" Grid.Column="1" Content="Add Pint" 
                 x:Name="AddPint" Grid.ColumnSpan="3"
                  IsEnabled="{Binding PintEnabled}"/>
 
+        <!--Row 6 pay button-->
         <Button Grid.Row="6" Grid.Column="1" Content="Pay" 
                 x:Name="PrintButton" Grid.ColumnSpan="3"   
                 Command="{Binding Path=PrintPageCommand}"
                 IsEnabled="{Binding PayEnabled}"/>
 
+        <!--Row 7 reset button-->
         <Button Grid.Row="7" Grid.Column="1" Content="Reset" 
                 x:Name="ResetButton" Grid.ColumnSpan="3"   
                 Command="{Binding Path=ResetPageCommand}"/>
         
 
-        <!--Row 5-->
-        <Label x:Name="TicketType_Name"  Grid.Row="5" Grid.Column="5"/>
 
 
-        <!--Row 7-->
+
+        <!--Ticket name displayed on UI Ticked-->
         <Label x:Name="SelectedTicket_Name"  Grid.Row="8" Grid.Column="6"
                HorizontalContentAlignment="Center"
                FontSize="14" FontWeight="Bold" />
+        
+        <!--Ticket food item displayed on UI Ticket-->
         <Label x:Name="SelectedTicket_FoodItem"  Grid.Row="9" Grid.Column="6"
                HorizontalContentAlignment="Center"
                FontSize="14" FontWeight="Bold" />
 
-
+        <!--Ticket quantity-->
         <Label Content="Ticket Quantity"  Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3"/>
         <Label x:Name="TicketAmount"  Grid.Row="9" Grid.Column="4"/>
 
-        <Label Content="TotalCost"  Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3"/>
-        <Label x:Name="TotalCost"  Grid.Row="10" Grid.Column="3"/>
-        
+        <!--Ticket cost-->
+        <Label Content="Total Cost:"  
+               Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3"
+               />
+        <TextBlock Text="{Binding TotalCost, StringFormat=£{0}}" 
+                   Style="{StaticResource priceStyle}"
+                   Grid.Row="10" Grid.Column="3"
+                   x:Name="priceTotal"/>
+
         <!--Slider Tickets Row 8-->
         <Slider 
                 x:Name="TicketSlider"
@@ -124,6 +148,7 @@
                 TickFrequency="10"
                 Value="{Binding TicketAmount, Mode=TwoWay}"
             IsEnabled="{Binding SliderEnabled}"/>
+        
         <!--QCode Image-->
         <Image Source="/Images/qcode.png" 
                Width="40"
@@ -133,6 +158,5 @@
                Grid.ColumnSpan="2" Grid.RowSpan="3"
                Margin="25,30,0,0"
                Visibility="{Binding QCode}"/>
-
     </Grid>
 </Window>
