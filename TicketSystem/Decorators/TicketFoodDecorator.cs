@@ -9,6 +9,7 @@ namespace TicketSystem.Decorators
 {
     public abstract class TicketFoodDecorator : TicketModel
     {
+        //Used to replace virtual member that is defined in TicketModel
         public abstract override string FoodItem { get; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TicketSystem.Models
 {
-    public class MemberTicketModel : TicketModel
+    public class MemberTicketModel : TicketModel //Inherits from TicketDecorator abstract class
     {
         public MemberTicketModel()
         {
@@ -15,7 +15,7 @@ namespace TicketSystem.Models
         }
         public override double Cost()
         {
-            return Math.Round(Price, 2, MidpointRounding.AwayFromZero);
+            return Math.Round(Price, 2, MidpointRounding.AwayFromZero); //2DP Rounding
         }
     }
 }

@@ -14,8 +14,8 @@ namespace TicketSystem.ViewModels
 {
     public class ShellViewModel : Screen
     {
-
-        private int _ticketAmount; //Total amount of tickets field
+        //Fields which are used to enable and disable UI elements
+        private int _ticketAmount; 
         private bool _tourEnabled = true;
         private bool _frontRowEnabled = true;
         private bool _comboEnabled = true;
@@ -24,14 +24,18 @@ namespace TicketSystem.ViewModels
         private bool _sliderEnabled = true;
         private string _qCode = "Hidden";
         private bool _payEnabled = true;
+        private TicketModel _selectedTicket; //Current selected ticket
+
         private BindableCollection<TicketModel> _tickets;
-        private TicketModel _selectedTicket; //Curent selected ticket field
+
         private ActionCommand resetPage; //Commands are bindable from xaml and they call functions
 
         public TicketModel Adult { get; set; } = new AdultTicketModel(); //Adult Ticket Model
         public TicketModel Child { get; set; } = new ChildTicketModel(); //Child Ticket Model   
         public TicketModel Member { get; set; } = new MemberTicketModel(); //Member Ticket Model
 
+
+        //Properties which notify observers of changed using NotifyOfPropertyChange(()
         public BindableCollection<TicketModel> Tickets
         {
             get { return _tickets; }
@@ -41,7 +45,9 @@ namespace TicketSystem.ViewModels
                 NotifyOfPropertyChange(() => Tickets);
             }
         }
-
+        //These full properties include notify property change to notify observers of change
+        //Most of these full properties are used to enable or disable the UI
+        //The XAML items isEnabled are bound to these properties
         public bool TourEnabled
         {
             get { return _tourEnabled; }
@@ -129,8 +135,6 @@ namespace TicketSystem.ViewModels
             get { return _totalCost; }
             set
             {
-                _totalCost = SelectedTicket.Cost() * TicketAmount;
-                _totalCost = Math.Round(TotalCost, 2, MidpointRounding.AwayFromZero);
                  _totalCost = value;
                 NotifyOfPropertyChange(() => TotalCost);
             }

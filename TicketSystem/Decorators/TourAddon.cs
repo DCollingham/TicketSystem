@@ -7,7 +7,7 @@ using TicketSystem.Models;
 
 namespace TicketSystem.Decorators
 {
-    class TourAddon : TicketDecorator
+    public class TourAddon : TicketDecorator //Inherits from TicketDecorator abstract class
     {
         private readonly TicketModel _ticketModel;
         private readonly double _tourPrice = 10.50;
@@ -16,11 +16,11 @@ namespace TicketSystem.Decorators
         {
             this._ticketModel = ticketModel;
         }
-        public override string Name => _ticketModel.Name + " & Tour";
+        public override string Name => _ticketModel.Name + " & Tour"; //Adds string to passed in object name
 
         public override double Cost()
         {
-            return this._ticketModel.Cost() + _tourPrice;
+            return this._ticketModel.Cost() + _tourPrice; //Adds the price of tour to decorated object
         }
     }
 }
