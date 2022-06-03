@@ -76,24 +76,46 @@
                   DisplayMemberPath="Name" MinWidth="120" 
                   IsEnabled="{Binding ComboEnabled}" 
                   />
+        <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding SelectedTicket.Price, StringFormat=£{0}}"
+                   VerticalAlignment="Center"
+                   Padding="5,0,0,0"
+                   Style="{StaticResource priceStyle}"/>
 
         <!--Row 2 Tour button and tour price-->
         <Button  Grid.Row="2" Grid.Column="1" Content="Add Tour" 
                  x:Name="AddTour" Grid.ColumnSpan="3" 
                  IsEnabled="{Binding TourEnabled}"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding TourPrice, StringFormat=£{0}}"
+                   VerticalAlignment="Center"
+                   Padding="5,0,0,0"
+                   Style="{StaticResource priceStyle}"/>
 
-        <!--Row 3 Tour button and tour price-->
-        <Button Grid.Row="3" Grid.Column="1" Content="Add Front Row" x:Name="AddFrontRow" Grid.ColumnSpan="3" IsEnabled="{Binding FrontRowEnabled}"/>
+        <!--Row 3 Front row button and price-->
+        <Button Grid.Row="3" Grid.Column="1" 
+                Content="Add Front Row" x:Name="AddFrontRow" 
+                Grid.ColumnSpan="3" IsEnabled="{Binding FrontRowEnabled}"/>
+        <TextBlock Grid.Row="3" Grid.Column="4" Text="{Binding FrontRowPrice, StringFormat= £{0}}"
+                   VerticalAlignment="Center" 
+                   Padding="5,0,0,0"
+                   Style="{StaticResource priceStyle}"/>
 
-        <!--Row 4 add pie button-->
+            <!--Row 4 add pie button-->
         <Button Grid.Row="4" Grid.Column="1" Content="Add Pie" 
                 x:Name="AddPie" Grid.ColumnSpan="3"
                  IsEnabled="{Binding PieEnabled}"/>
-        
+        <TextBlock Grid.Row="4" Grid.Column="4" Text="{Binding PiePrice, StringFormat= £{0}}"
+                   VerticalAlignment="Center" 
+                   Padding="5,0,0,0"
+                   Style="{StaticResource priceStyle}"/>
+
         <!--Row 5 add column button-->
         <Button Grid.Row="5" Grid.Column="1" Content="Add Pint" 
                 x:Name="AddPint" Grid.ColumnSpan="3"
                  IsEnabled="{Binding PintEnabled}"/>
+        <TextBlock Grid.Row="5" Grid.Column="4" Text="{Binding PintPrice, StringFormat= £{0}}"
+                   VerticalAlignment="Center" 
+                   Padding="5,0,0,0"
+                   Style="{StaticResource priceStyle}"/>
 
         <!--Row 6 pay button-->
         <Button Grid.Row="6" Grid.Column="1" Content="Pay" 

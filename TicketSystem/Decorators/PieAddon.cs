@@ -12,7 +12,7 @@ namespace TicketSystem.Decorators
     {
         private readonly TicketModel _ticketModel;
         private string premessage; //Message to be added to Food Item
-        private readonly double _price = 5.5;
+        public static double PiePrice { get; } = 5.5; //Accessable by other classes
         public PieAddon(TicketModel ticketModel)
         {
             this._ticketModel = ticketModel;
@@ -32,11 +32,13 @@ namespace TicketSystem.Decorators
             }
         }
         public override string FoodItem => _ticketModel.FoodItem + premessage + "Pie"; //The message that is added
-        public override string Name => _ticketModel.Name;
+
+        public override double Price => _ticketModel.Price; //Without this price is set to 0 after decoration
+        public override string Name => _ticketModel.Name; //Without this Name is blank after decoration
 
         public override double Cost()
         {
-            return this._ticketModel.Cost() + _price;
+            return this._ticketModel.Cost() + PiePrice;
         }
     }
 }
