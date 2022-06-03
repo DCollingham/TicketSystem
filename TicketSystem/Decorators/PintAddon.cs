@@ -12,7 +12,7 @@ namespace TicketSystem.Decorators
     {
         private readonly TicketModel _ticketModel;
         private string premessage; //Message to be added to passed in object
-        private readonly double _price = 3.5;
+        public static double PintPrice { get; } = 3.5; //Accessable by other classes
         public PintAddon(TicketModel ticketModel)
         {
             this._ticketModel = ticketModel;
@@ -32,11 +32,12 @@ namespace TicketSystem.Decorators
         }
         //Adds pre-message then pint to decorated object
         public override string FoodItem => _ticketModel.FoodItem + premessage + "Pint"; 
-        public override string Name => _ticketModel.Name;
+        public override string Name => _ticketModel.Name; //Without this Name is blank after decoration
+        public override double Price => _ticketModel.Price; //Without this price is set to 0 after decoration
 
         public override double Cost()
         {
-            return this._ticketModel.Cost() + _price;
+            return this._ticketModel.Cost() + PintPrice;
         }
     }
 }

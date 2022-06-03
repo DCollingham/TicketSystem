@@ -3,6 +3,7 @@ using Microsoft.Xaml.Behaviors.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,13 @@ namespace TicketSystem.ViewModels
         private bool _sliderEnabled = true;
         private string _qCode = "Hidden";
         private bool _payEnabled = true;
+        private double _totalCost;
         private TicketModel _selectedTicket; //Current selected ticket
+        private double _frontRowPrice = FrontRowAddon.FrontRowPrice;
+        private double _tourPrice = TourAddon.TourPrice;
+        private double _pintPrice = PintAddon.PintPrice;
+        private double _piePrice = PieAddon.PiePrice;
+
 
         private BindableCollection<TicketModel> _tickets;
 
@@ -33,6 +40,50 @@ namespace TicketSystem.ViewModels
         public TicketModel Adult { get; set; } = new AdultTicketModel(); //Adult Ticket Model
         public TicketModel Child { get; set; } = new ChildTicketModel(); //Child Ticket Model   
         public TicketModel Member { get; set; } = new MemberTicketModel(); //Member Ticket Model
+
+        
+        public double PiePrice
+        {
+            get 
+            {       
+                return _piePrice;
+            }
+            set
+            { 
+                _piePrice = value;
+                NotifyOfPropertyChange(() => PiePrice);
+            }
+        }
+
+        public double PintPrice
+        {
+            get { return _pintPrice; }
+            set
+            { 
+                _pintPrice = value;
+                NotifyOfPropertyChange(() => PintPrice);
+            }
+        }
+
+        public double TourPrice
+        {
+            get { return _tourPrice; }
+            set 
+            { 
+                _tourPrice = value;
+                NotifyOfPropertyChange(() => TourPrice);
+            }
+        }
+
+        public double FrontRowPrice
+        {
+            get { return _frontRowPrice; }
+            set 
+            { 
+                _frontRowPrice = value;
+                NotifyOfPropertyChange(() => FrontRowPrice);
+            }
+        }
 
 
         //Properties which notify observers of changed using NotifyOfPropertyChange(()
@@ -128,8 +179,6 @@ namespace TicketSystem.ViewModels
             }
         }
 
-        private double _totalCost;
-
         public double TotalCost
         {
             get { return _totalCost; }
@@ -156,7 +205,7 @@ namespace TicketSystem.ViewModels
         }
 
         //Adds Tickets to the bindable collection
-        public ShellViewModel()
+        public ShellViewModel() //Constructor
         {
             _selectedTicket = Adult; //Sets selected ticket field to Adult
             TotalCost = _selectedTicket.Price; //Initially sets the cost to the first ticket selected
@@ -184,7 +233,9 @@ namespace TicketSystem.ViewModels
         {
             ComboEnabled = false; //Disables combo box
             TourEnabled = false; //Disables tour button
+            Debug.WriteLine($"The selected before price is: {SelectedTicket.Price}");
             SelectedTicket = new TourAddon(SelectedTicket); //Decorates ticket with tour
+            Debug.WriteLine($"The selected after price is: {SelectedTicket.Price}");
         }
 
         public void AddFrontRow()

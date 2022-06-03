@@ -11,5 +11,7 @@ namespace TicketSystem.Models
     {
         //Used to replace virtual member that is defined in TicketModel
         public abstract override string Name { get; }
+
+        public abstract override double Price { get; }
     }
 }
