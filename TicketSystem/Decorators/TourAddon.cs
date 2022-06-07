@@ -17,7 +17,7 @@ namespace TicketSystem.Decorators
         }
         public override string Name => _ticketModel.Name + " & Tour"; //Adds string to passed in object name
         public override double Price => _ticketModel.Price; //Without this price is set to 0 after decoration
-
+        public override string FoodItem => _ticketModel.FoodItem;
         public override double Cost()
         {
             return this._ticketModel.Cost() + TourPrice; //Adds the price of tour to decorated object

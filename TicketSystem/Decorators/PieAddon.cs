@@ -35,7 +35,6 @@ namespace TicketSystem.Decorators
 
         public override double Price => _ticketModel.Price; //Without this price is set to 0 after decoration
         public override string Name => _ticketModel.Name; //Without this Name is blank after decoration
-
         public override double Cost()
         {
             return this._ticketModel.Cost() + PiePrice;

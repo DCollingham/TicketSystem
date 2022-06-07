@@ -233,9 +233,7 @@ namespace TicketSystem.ViewModels
         {
             ComboEnabled = false; //Disables combo box
             TourEnabled = false; //Disables tour button
-            Debug.WriteLine($"The selected before price is: {SelectedTicket.Price}");
             SelectedTicket = new TourAddon(SelectedTicket); //Decorates ticket with tour
-            Debug.WriteLine($"The selected after price is: {SelectedTicket.Price}");
         }
 
         public void AddFrontRow()
