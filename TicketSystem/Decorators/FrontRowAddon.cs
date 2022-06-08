@@ -21,6 +21,7 @@ namespace TicketSystem.Decorators
         //This is added to the passed in ticket model object
         public override string Name => _ticketModel.Name + " with Front Row Seats"; //Adds front row description to name
         public override double Price => _ticketModel.Price; //Without this price is set to 0 after decoration
+        public override string FoodItem => _ticketModel.FoodItem;
 
         public override double Cost()
         {
